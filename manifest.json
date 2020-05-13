@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Pastel Palette",
+    "version": "1.0.0",
+    "description": "",
+    "permissions": [
+        "storage"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "run_at": "document_end",
+            "matches":["https://www.youtube.com/*", "http://www.youtube.com/*"], 
+            "js": ["jquery-3.5.1.min.js", "main_script.js"]
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    }
+}
