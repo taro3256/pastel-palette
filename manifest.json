@@ -1,10 +1,12 @@
 {
     "manifest_version": 2,
     "name": "Pastel Palette",
-    "version": "1.0.0",
+    "version": "0.3",
     "description": "デザインのためのカラーパレット",
     "permissions": [
-        "storage"
+        "storage",
+        "tabs",
+        "<all_urls>"
     ],
     "icons": {
         "16": "img/logo.png",
@@ -17,8 +19,8 @@
     "content_scripts": [
         {
             "run_at": "document_end",
-            "matches":["http://*/*", "https://*/*"], 
-            "js": ["jquery-3.5.1.min.js", "popup.js"]
+            "matches":["<all_urls>"], 
+            "js": ["jquery-3.5.1.min.js", "content.js"]
         }
     ],
     "background": {
