@@ -61,7 +61,7 @@ function copyTextToClipboard(text_val){
 }
 
 let palette_templates = JSON.parse(localStorage.getItem('palette_templates'));
-if (!palette_templates){
+if (!palette_templates.length){
     // テンプレートが存在しない場合はパステルテンプレートを追加
     window.localStorage.setItem('palette_templates', JSON.stringify([
         {
@@ -107,9 +107,10 @@ let display_template;
 let template_colors;
 let template_colors_length;
 let display_min_color_box;
+let select_colors;
 for (i=0; i<palette_templates.length; i++) {
     // 枠を作る
-    display_templates = "<div class='palette-card palette-card"+ String(i) +"'></div>";
+    display_templates = "<div class='palette-card palette-card" + String(i) + "'></div>";
     $(".palette-body").append(display_templates);
     // 色を塗る
     template_colors = palette_templates[String(i)];
@@ -117,23 +118,38 @@ for (i=0; i<palette_templates.length; i++) {
 
     display_min_color_box = "";
     for (j=0; j<template_colors_length; j++) {
-        display_min_color_box += "<div class='min-color-box' style='background-color: " + template_colors[String(j)]['bg'] + ";'></div>";
+        display_min_color_box += "<div class='min-color-box min-color-box" + String(i) + "' style='background-color: " + template_colors[String(j)]['bg'] + ";'></div>";
     }
     for (j=0; j<template_colors_length; j++) {
-        display_min_color_box += "<div class='min-color-box' style='background-color: " + template_colors[String(j)]['text'] + ";'></div>";
+        display_min_color_box += "<div class='min-color-box min-color-box" + String(i) + "' style='background-color: " + template_colors[String(j)]['text'] + ";'></div>";
     }
     $(".palette-card"+String(i)).append(display_min_color_box);
     // xボタンを追加
-    $(".palette-card"+String(i)).append("<div class='x x" + String(i) + "'>x</div>");   
+    $(".palette-card"+String(i)).append("<div class='x x" + String(i) + "'>x</div>");
+
+    let index = String(i);
+    // クリックしたパレットを適用
+    $(".min-color-box"+String(i)).on("click", () => {
+        select_colors = palette_templates[index];
+        delete palette_templates[index];
+        window.localStorage.setItem('colors', JSON.stringify(select_colors));
+        window.localStorage.setItem('palette_templates', JSON.stringify([select_colors].concat(Object.values(palette_templates))));
+        location.reload();
+    });
+
+    // xボタンをクリックしたパレットを削除
+    $(".x"+String(i)).on("click", () => {
+        delete_check = window.confirm("選択したパレットを削除するで");
+        if (delete_check) {
+            select_colors = palette_templates["0"];
+            delete palette_templates[index];
+            console.log(select_colors);
+            window.localStorage.setItem('colors', JSON.stringify(select_colors));
+            window.localStorage.setItem('palette_templates', JSON.stringify([].concat(Object.values(palette_templates))));
+            location.reload();
+        }
+    });
 }
-
-// パレットを適用
-$(".palette-card").on("click", () => {
-    index = $(".palette-card").index(this);
-    console.log(index);
-});
-
-// xボタンが押されたパレットを削除
 
 $(".palette-card-add").on("click", () => {
     palette_templates = JSON.parse(localStorage.getItem('palette_templates'));

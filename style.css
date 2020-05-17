@@ -159,4 +159,5 @@ body {
     font-size: 100%;
     font-weight: bold;
     color: #999;
+    z-index: 1;
 }
