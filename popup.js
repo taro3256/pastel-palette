@@ -60,9 +60,9 @@ function copyTextToClipboard(text_val){
     return ret_val;
 }
 
-palette_templates = JSON.parse(localStorage.getItem('palette_templates'));
-// テンプレートが存在しない場合はパステルテンプレートを追加
+let palette_templates = JSON.parse(localStorage.getItem('palette_templates'));
 if (!palette_templates){
+    // テンプレートが存在しない場合はパステルテンプレートを追加
     window.localStorage.setItem('palette_templates', JSON.stringify([
         {
             "0":{
@@ -99,7 +99,48 @@ if (!palette_templates){
             },
         }
     ]));
+    location.reload();
 }
+
+// パレットテンプレート表示
+let display_template;
+let template_colors;
+let template_colors_length;
+let display_min_color_box;
+for (i=0; i<palette_templates.length; i++) {
+    // 枠を作る
+    display_templates = "<div class='palette-card palette-card"+ String(i) +"'></div>";
+    $(".palette-body").append(display_templates);
+    // 色を塗る
+    template_colors = palette_templates[String(i)];
+    template_colors_length = Object.keys(template_colors).length;
+
+    display_min_color_box = "";
+    for (j=0; j<template_colors_length; j++) {
+        display_min_color_box += "<div class='min-color-box' style='background-color: " + template_colors[String(j)]['bg'] + ";'></div>";
+    }
+    for (j=0; j<template_colors_length; j++) {
+        display_min_color_box += "<div class='min-color-box' style='background-color: " + template_colors[String(j)]['text'] + ";'></div>";
+    }
+    $(".palette-card"+String(i)).append(display_min_color_box);
+    // xボタンを追加
+    $(".palette-card"+String(i)).append("<div class='x x" + String(i) + "'>x</div>");   
+}
+
+// パレットを適用
+$(".palette-card").on("click", () => {
+    index = $(".palette-card").index(this);
+    console.log(index);
+});
+
+// xボタンが押されたパレットを削除
+
+$(".palette-card-add").on("click", () => {
+    palette_templates = JSON.parse(localStorage.getItem('palette_templates'));
+    tmp = [colors];
+    window.localStorage.setItem('palette_templates', JSON.stringify(tmp.concat(Object.values(palette_templates))));
+    location.reload();
+});
 
 // カラーパレットを表示
 let colors = JSON.parse(localStorage.getItem('colors'));
@@ -107,16 +148,16 @@ let colors = JSON.parse(localStorage.getItem('colors'));
 if (!colors["length"]) {
     colors = palette_templates["0"];
 }
-
 let display_color;
 let colors_length = colors.length;
+let hex_bg;
+let hex_text;
 if (!colors_length) {
-    colors_length = Object.keys(colors).length
+    colors_length = Object.keys(colors).length;
 }
-
 for (i=0; i<colors_length; i++) {
-    let hex_bg = rgb2Hex(colors[String(i)]["bg"]);
-    let hex_text = rgb2Hex(colors[String(i)]["text"]);
+    hex_bg = rgb2Hex(colors[String(i)]["bg"]);
+    hex_text = rgb2Hex(colors[String(i)]["text"]);
     display_color = "";
     display_color = "<div class='palette'>";
     display_color += "<div class='color-text color" + String(i) + "'>TEXT</div>";
