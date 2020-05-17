@@ -166,12 +166,12 @@ if (!colors["length"]) {
 }
 let display_color;
 let colors_length = colors.length;
-let hex_bg;
-let hex_text;
 if (!colors_length) {
     colors_length = Object.keys(colors).length;
 }
 for (i=0; i<colors_length; i++) {
+    let hex_bg;
+    let hex_text;
     hex_bg = rgb2Hex(colors[String(i)]["bg"]);
     hex_text = rgb2Hex(colors[String(i)]["text"]);
     display_color = "";
