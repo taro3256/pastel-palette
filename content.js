@@ -1,13 +1,13 @@
-var needsReload = true;
+let needs_reload = true;
 window.onfocus=function(){
-  needsReload = true;
+  needs_reload = true;
 }
 window.onblur=function(){
-  needsReload = false;
+  needs_reload = false;
 }
 
 let interval = setInterval(function(){
-    if(needsReload){
+    if(needs_reload){
         console.log("run content.js");
         let flag_load_complete = 0;
         let page_url;
@@ -55,6 +55,8 @@ let interval = setInterval(function(){
                             }
                         });
                     });
+                    clearInterval(interval);
+                    clearInterval(get_interval);
                 }
             // 開いているページのURLを取得する
             } else {

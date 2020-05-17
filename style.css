@@ -1,5 +1,129 @@
 body {
-    width: 480px;
-    height: 640px;
+    width: 600px;
+    height: 900px;
     text-align: center;
+    background-color: #88E7CE;
+}
+
+#title {
+    color: #f52d98;
+}
+
+.browse-page-url-label {
+    color: #0070d2;
+}
+
+#contetnt {
+    display: flex;
+    margin-top: 20px;
+}
+
+#colors {
+    text-align: left;
+    width: 300px;
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.1) inset;
+}
+
+#colors:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2) inset;
+}
+
+#palette-list {
+    background-color: #464c55;
+    width: 300px;
+    height: auto;
+}
+
+.color-text {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    border: solid 2px;
+    border-color: #8491a5;
+    width: 70px;
+    height: 70px;
+    margin: 20px;
+    display: flex;
+}
+
+.palette {
+    display: flex;
+}
+
+.color-boxs {
+    margin-top: 22px;
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.color-box {
+    margin: 0px;
+    width: 25px;
+    height: 25px;
+    border: solid 1px;
+    border-color: black;
+}
+
+.copy-btns {
+    margin-top: 20px;
+}
+
+.copy-btn {
+    margin: 2px;
+    height: 31px;
+    width: 120px;
+    line-height: 1;
+    text-decoration: none;
+    letter-spacing: 0.05em;/*字間*/
+    padding: 0.2em 1em;/*ボタン内の余白*/
+    border-radius: 3px;/*角の丸み*/
+      cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);/*影*/
+    -webkit-tap-highlight-color: transparent;
+    transition: .3s ease-out;/*変化を緩やかに*/
+}
+
+.bgcolor-copy-btn{
+    background-color: #26a69b;/*背景色*/
+    color: #FFF;/*文字色*/
+    font-size: 1em;/*文字サイズ*/
+}
+  
+.bgcolor-copy-btn:hover{
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);/*浮き上がるように*/
+}
+
+.text-copy-btn{
+    background-color: #26a69b;/*背景色*/
+    color: #FFF;/*文字色*/
+    font-size: 1em;/*文字サイズ*/
+}
+  
+.text-copy-btn:hover{
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);/*浮き上がるように*/
+}
+
+/* テンプレート */
+.palette-body {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    padding-left: 4px;
+    width: 99%;
+    color: white;
+}
+
+.palette-card {
+    margin: .5em;
+    height: 100px;
+    width: 45%;
+    min-width: 100px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(#000, .1);
+}
+
+.palette-card:hover {
+    box-shadow: 2px 2px 2px 2px rgba(#000, 0.2) inset;
 }
