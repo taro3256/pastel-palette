@@ -61,7 +61,7 @@ function copyTextToClipboard(text_val){
 }
 
 let palette_templates = JSON.parse(localStorage.getItem('palette_templates'));
-if (!palette_templates.length){
+if (!palette_templates || !palette_templates.length){
     // テンプレートが存在しない場合はパステルテンプレートを追加
     window.localStorage.setItem('palette_templates', JSON.stringify([
         {
